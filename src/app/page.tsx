@@ -6,7 +6,8 @@ import { WebsiteData } from "@/lib/types";
 import { Navbar, Footer } from "@/components/Navigation";
 import { Hero, About, Services, Contact } from "@/components/DynamicSections";
 import { ContactModal } from "@/components/ContactModal";
-import { Loader2, AlertCircle, RefreshCcw } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faExclamationTriangle, faSync } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
 
 const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbz2Di17J-vySwaCPRWg3TlrIDS2oqDnz_IW46EZ-V2GzC-XrwOuxX_X46ryoreqzF5G/exec';
@@ -25,7 +26,6 @@ export default function Home() {
       if (!response.ok) throw new Error("Gagal mengambil data dari Google Sheets");
       const jsonData = await response.json();
       
-      // Default mapping if something is missing
       if (!jsonData.company || Object.keys(jsonData.company).length === 0) {
         jsonData.company = {
           company_name: 'SheetsFlow',
@@ -51,7 +51,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="w-16 h-16 text-primary animate-spin" />
+        <FontAwesomeIcon icon={faSpinner} spin className="text-5xl text-primary" />
         <p className="text-xl font-headline font-bold text-gray-800">Menghubungkan ke SheetsFlow...</p>
         <p className="text-gray-500 animate-pulse">Sinkronisasi data real-time sedang berlangsung</p>
       </div>
@@ -61,11 +61,11 @@ export default function Home() {
   if (error || !data) {
     return (
       <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-6 text-center">
-        <AlertCircle className="w-20 h-20 text-red-500 mb-6" />
+        <FontAwesomeIcon icon={faExclamationTriangle} className="text-7xl text-red-500 mb-6" />
         <h2 className="text-3xl font-headline font-bold text-gray-900 mb-2">Terjadi Kesalahan Sinkronisasi</h2>
         <p className="text-gray-600 max-w-md mb-8">{error}</p>
         <Button size="lg" onClick={fetchData} className="rounded-xl">
-          <RefreshCcw className="w-5 h-5 mr-2" /> Coba Lagi
+          <FontAwesomeIcon icon={faSync} className="mr-2" /> Coba Lagi
         </Button>
       </div>
     );

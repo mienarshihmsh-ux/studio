@@ -1,17 +1,47 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CompanyData, NavigationItem } from "@/lib/types";
+import { CompanyData, NavigationItem, SocialData } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Building2, Send, Phone, Mail, MapPin } from "lucide-react";
-import * as LucideIcons from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faBuilding, 
+  faPaperPlane, 
+  faBars, 
+  faTimes, 
+  faPhone, 
+  faEnvelope, 
+  faMapMarkerAlt 
+} from "@fortawesome/free-solid-svg-icons";
+import { 
+  faFacebook, 
+  faInstagram, 
+  faTwitter, 
+  faLinkedin, 
+  faWhatsapp,
+  faYoutube
+} from "@fortawesome/free-brands-svg-icons";
 import { cn } from "@/lib/utils";
 
+const ICON_MAP: Record<string, any> = {
+  building: faBuilding,
+  paperplane: faPaperPlane,
+  facebook: faFacebook,
+  instagram: faInstagram,
+  twitter: faTwitter,
+  linkedin: faLinkedin,
+  whatsapp: faWhatsapp,
+  youtube: faYoutube,
+  phone: faPhone,
+  envelope: faEnvelope,
+  mapmarker: faMapMarkerAlt
+};
+
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  const IconComponent = (LucideIcons as any)[
-    (iconName || 'Building2').charAt(0).toUpperCase() + (iconName || 'Building2').slice(1)
-  ] || Building2;
-  return <IconComponent className={className} />;
+  const name = (iconName || 'building').toLowerCase();
+  const icon = ICON_MAP[name] || faBuilding;
+  return <FontAwesomeIcon icon={icon} className={className} />;
 };
 
 export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyData; navItems: NavigationItem[]; onOpenContact: () => void }) => {
@@ -71,7 +101,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
             ))}
             <div className="pl-4">
               <Button onClick={onOpenContact} className="font-semibold rounded-xl">
-                <Send className="w-4 h-4 mr-2" /> Pesan
+                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Pesan
               </Button>
             </div>
           </div>
@@ -81,7 +111,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
               className="text-gray-900 p-2 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              {isMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -107,7 +137,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
             </a>
           ))}
           <Button onClick={() => { onOpenContact(); setIsMenuOpen(false); }} className="w-full h-12 text-lg font-semibold mt-4 rounded-xl">
-            <Send className="w-5 h-5 mr-2" /> Hubungi Kami
+            <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Hubungi Kami
           </Button>
         </div>
       </div>
@@ -145,15 +175,15 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
             <h4 className="text-xl font-headline font-bold mb-8">Informasi Kontak</h4>
             <ul className="space-y-4 text-gray-400 text-lg">
               <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-primary mt-1" />
+                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1" />
                 <span>{company.phone}</span>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-primary mt-1" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1" />
                 <span>{company.email}</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-1" />
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1" />
                 <span>{(company.address || '').split(',')[0]}</span>
               </li>
             </ul>

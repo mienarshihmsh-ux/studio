@@ -1,32 +1,54 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { CompanyData, ServiceData, SocialData, WebsiteData } from "@/lib/types";
+import { CompanyData, ServiceData } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
-  Building2, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send,
-  Users,
-  LayoutGrid,
-  Sparkles,
-  Loader2
-} from "lucide-react";
-import * as LucideIcons from "lucide-react";
+  faBuilding, 
+  faPaperPlane, 
+  faPhone, 
+  faEnvelope, 
+  faMapMarkerAlt, 
+  faClock, 
+  faUsers, 
+  faThLarge, 
+  faMagic, 
+  faSpinner,
+  faCogs,
+  faChartLine,
+  faShieldAlt,
+  faGlobe,
+  faMobileAlt,
+  faCloud
+} from "@fortawesome/free-solid-svg-icons";
 import { suggestHeroCopy, SuggestHeroCopyOutput } from "@/ai/flows/suggest-hero-copy";
 
+const ICON_MAP: Record<string, any> = {
+  building: faBuilding,
+  users: faUsers,
+  grid: faThLarge,
+  magic: faMagic,
+  cogs: faCogs,
+  chart: faChartLine,
+  shield: faShieldAlt,
+  globe: faGlobe,
+  mobile: faMobileAlt,
+  cloud: faCloud,
+  phone: faPhone,
+  envelope: faEnvelope,
+  mapmarker: faMapMarkerAlt,
+  clock: faClock
+};
+
 const IconWrapper = ({ iconName, className }: { iconName: string; className?: string }) => {
-  const IconComponent = (LucideIcons as any)[
-    iconName.charAt(0).toUpperCase() + iconName.slice(1)
-  ] || Building2;
-  return <IconComponent className={className} />;
+  const name = iconName.toLowerCase();
+  const icon = ICON_MAP[name] || faCogs;
+  return <FontAwesomeIcon icon={icon} className={className} />;
 };
 
 export const Hero = ({ company, services, onOpenContact }: { company: CompanyData; services: ServiceData[]; onOpenContact: () => void }) => {
@@ -62,7 +84,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
             </p>
             <div className="flex flex-wrap gap-4">
               <Button size="lg" onClick={onOpenContact} className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
-                <Send className="mr-2 w-5 h-5" /> Kirim Pesan
+                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Kirim Pesan
               </Button>
               <Button size="lg" variant="outline" asChild className="h-14 px-8 text-lg font-semibold rounded-xl border-primary text-primary hover:bg-primary/5">
                 <a href="#layanan">Lihat Layanan</a>
@@ -74,7 +96,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
               disabled={loadingAi}
               className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20"
             >
-              {loadingAi ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+              {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
               Optimalkan Copy dengan AI
             </button>
           </div>
@@ -86,12 +108,11 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
                 width={800} 
                 height={600} 
                 className="w-full object-cover aspect-[4/3]"
-                data-ai-hint="business office"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl flex items-center gap-4 animate-bounce duration-[3000ms]">
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                <Users className="w-6 h-6" />
+                <FontAwesomeIcon icon={faUsers} className="text-xl" />
               </div>
               <div>
                 <p className="text-sm text-gray-500">Klien Puas</p>
@@ -127,14 +148,14 @@ export const About = ({ company }: { company: CompanyData }) => {
             <div className="grid grid-cols-2 gap-6 pt-4">
               <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100">
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
-                  <Users className="w-6 h-6" />
+                  <FontAwesomeIcon icon={faUsers} className="text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-gray-900">{company.stat_clients || "100+"}</p>
                 <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">{company.stat_clients_label || "Klien Puas"}</p>
               </div>
               <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-4">
-                  <LayoutGrid className="w-6 h-6" />
+                  <FontAwesomeIcon icon={faThLarge} className="text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-gray-900">{company.stat_projects || "500+"}</p>
                 <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">{company.stat_projects_label || "Proyek Selesai"}</p>
@@ -148,7 +169,6 @@ export const About = ({ company }: { company: CompanyData }) => {
               width={800} 
               height={600} 
               className="w-full object-cover"
-              data-ai-hint="team meeting"
             />
           </div>
         </div>
@@ -171,7 +191,7 @@ export const Services = ({ services }: { services: ServiceData[] }) => {
             <Card key={idx} className="border-none shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 rounded-2xl overflow-hidden group">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                  <IconWrapper iconName={service.icon} className="w-8 h-8 text-primary group-hover:text-white" />
+                  <IconWrapper iconName={service.icon} className="text-2xl text-primary group-hover:text-white" />
                 </div>
                 <h3 className="text-2xl font-headline font-bold text-gray-900 mb-4">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed text-lg">{service.description}</p>
@@ -200,7 +220,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <div className="space-y-6">
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <MapPin className="w-7 h-7" />
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Alamat Kantor</h3>
@@ -209,7 +229,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <Phone className="w-7 h-7" />
+                <FontAwesomeIcon icon={faPhone} className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Telepon & WhatsApp</h3>
@@ -219,7 +239,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <Mail className="w-7 h-7" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Email Dukungan</h3>
@@ -229,7 +249,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <Clock className="w-7 h-7" />
+                <FontAwesomeIcon icon={faClock} className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Jam Operasional</h3>
