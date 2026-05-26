@@ -1,10 +1,9 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { CompanyData, NavigationItem } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Building2, Send } from "lucide-react";
+import { Menu, X, Building2, Send, Phone, Mail, MapPin } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { cn } from "@/lib/utils";
 
