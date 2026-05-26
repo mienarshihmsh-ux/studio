@@ -90,7 +90,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] flex flex-col p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] flex flex-col p-0">
         <DialogHeader className="p-6 pb-2">
           <DialogTitle className="flex items-center gap-3 text-2xl font-headline font-bold text-gray-800">
             <FontAwesomeIcon icon={faPaperPlane} className="text-primary" />
@@ -100,7 +100,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             Silakan lengkapi data di bawah ini untuk menghubungi kami.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="flex-1 px-6 pb-6">
+        <ScrollArea className="flex-1 px-6 pb-6 overflow-y-auto">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-2">
               <FormField

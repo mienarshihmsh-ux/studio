@@ -156,7 +156,7 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
               <span className="text-2xl font-headline font-bold">{company.company_name}</span>
             </div>
             <p className="text-gray-400 text-lg leading-relaxed">
-              {company.footer_tagline || "Memberikan solusi bisnis terbaik yang adaptif dan inovatif."}
+              {company.footer_tagline || "Memberikan solusi bisnis terbaik yang adaptif and inovatif."}
             </p>
           </div>
           <div>
@@ -175,15 +175,15 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
             <h4 className="text-xl font-headline font-bold mb-8">Informasi Kontak</h4>
             <ul className="space-y-4 text-gray-400 text-lg">
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1" />
+                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1 w-5 h-5" />
                 <span>{company.phone}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1 w-5 h-5" />
                 <span>{company.email}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1" />
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1 w-5 h-5" />
                 <span>{(company.address || '').split(',')[0]}</span>
               </li>
             </ul>
