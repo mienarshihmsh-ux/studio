@@ -76,10 +76,10 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-headline font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-headline font-extrabold text-gray-900 leading-tight">
               {aiCopy?.headline || company.hero_title || "Solusi Terbaik Untuk Bisnis Anda"}
             </h1>
-            <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
               {aiCopy?.subheading || company.hero_subtitle || "Kami menyediakan layanan profesional berkualitas tinggi untuk membantu kesuksesan bisnis Anda."}
             </p>
             <div className="flex flex-wrap gap-4">
