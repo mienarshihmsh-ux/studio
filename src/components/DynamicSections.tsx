@@ -82,23 +82,23 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
               {aiCopy?.subheading || company.hero_subtitle || "Kami menyediakan layanan profesional berkualitas tinggi untuk membantu kesuksesan bisnis Anda."}
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 items-center">
               <Button size="lg" onClick={onOpenContact} className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
                 <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Kirim Pesan
               </Button>
               <Button size="lg" variant="outline" asChild className="h-14 px-8 text-lg font-semibold rounded-xl border-primary text-primary hover:bg-primary/5">
                 <a href="#layanan">Lihat Layanan</a>
               </Button>
+              
+              <button 
+                onClick={handleSuggestAi}
+                disabled={loadingAi}
+                className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit"
+              >
+                {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
+                Optimalkan Copy dengan AI
+              </button>
             </div>
-            
-            <button 
-              onClick={handleSuggestAi}
-              disabled={loadingAi}
-              className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20"
-            >
-              {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
-              Optimalkan Copy dengan AI
-            </button>
           </div>
           <div className="relative group perspective-1000 hidden md:block">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
