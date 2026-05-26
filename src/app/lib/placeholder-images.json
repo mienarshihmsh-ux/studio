@@ -1,0 +1,17 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-image",
+      "description": "Professional team working in a modern office environment",
+      "imageUrl": "https://picsum.photos/seed/88/800/600",
+      "imageHint": "business office"
+    },
+    {
+      "id": "about-image",
+      "description": "Collaborative business discussion in a bright workspace",
+      "imageUrl": "https://picsum.photos/seed/99/800/600",
+      "imageHint": "team collaboration"
+    }
+  ]
+}
