@@ -27,6 +27,7 @@ import {
   faCloud
 } from "@fortawesome/free-solid-svg-icons";
 import { suggestHeroCopy, SuggestHeroCopyOutput } from "@/ai/flows/suggest-hero-copy";
+import { cn } from "@/lib/utils";
 
 const ICON_MAP: Record<string, any> = {
   building: faBuilding,
@@ -79,6 +80,19 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
             <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-headline font-extrabold text-gray-900 leading-tight">
               {aiCopy?.headline || company.hero_title || "Solusi Terbaik Untuk Bisnis Anda"}
             </h1>
+            
+            {/* Mobile AI Button: displayed after H1 */}
+            <div className="md:hidden">
+              <button 
+                onClick={handleSuggestAi}
+                disabled={loadingAi}
+                className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit w-fit"
+              >
+                {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
+                Optimalkan Copy dengan AI
+              </button>
+            </div>
+
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
               {aiCopy?.subheading || company.hero_subtitle || "Kami menyediakan layanan profesional berkualitas tinggi untuk membantu kesuksesan bisnis Anda."}
             </p>
@@ -90,10 +104,11 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
                 <a href="#layanan">Lihat Layanan</a>
               </Button>
               
+              {/* Desktop AI Button: displayed after main buttons */}
               <button 
                 onClick={handleSuggestAi}
                 disabled={loadingAi}
-                className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit"
+                className="hidden md:flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit"
               >
                 {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
                 Optimalkan Copy dengan AI
