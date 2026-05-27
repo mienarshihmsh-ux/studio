@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -89,7 +88,7 @@ const ICON_MAP: Record<string, any> = {
 };
 
 export const IconWrapper = ({ iconName, className }: { iconName?: string | null; className?: string }) => {
-  if (!iconName || iconName === 'null') return null;
+  if (!iconName || iconName === 'null' || iconName === 'undefined') return null;
   const name = iconName.trim();
   if (!name) return null;
 
@@ -100,9 +99,9 @@ export const IconWrapper = ({ iconName, className }: { iconName?: string | null;
     return <i className={cn(name, className)}></i>;
   }
 
-  // 2. Internal SVG Mapping (Best quality)
+  // 2. Internal SVG Mapping (Safe & Best quality)
   const mappedIcon = ICON_MAP[lowerName];
-  if (mappedIcon && typeof mappedIcon === 'object') {
+  if (mappedIcon && typeof mappedIcon === 'object' && mappedIcon.prefix && mappedIcon.iconName) {
     return <FontAwesomeIcon icon={mappedIcon} className={className} />;
   }
 
