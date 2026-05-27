@@ -151,7 +151,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
         </div>
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
-            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="mapmarker" className="text-xl" />
               </div>
@@ -165,7 +165,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
               </div>
             </div>
             
-            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="phone" className="text-xl" />
               </div>
@@ -176,7 +176,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
               </div>
             </div>
 
-            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="clock" className="text-xl" />
               </div>
@@ -190,7 +190,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
               </div>
             </div>
 
-            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="envelope" className="text-xl" />
               </div>
