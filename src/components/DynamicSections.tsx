@@ -38,12 +38,15 @@ const ICON_MAP: Record<string, any> = {
   phone: faPhone,
   envelope: faEnvelope,
   mapmarker: faMapMarkerAlt,
-  clock: faClock
+  clock: faClock,
+  paperplane: faPaperPlane
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  const name = (iconName || 'cogs').toLowerCase();
+  const name = (iconName || '').toLowerCase().trim();
   const icon = ICON_MAP[name] || faCogs;
+  
+  if (!icon) return null;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
 
@@ -67,7 +70,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
                 <a href="#layanan">Lihat Layanan</a>
               </Button>
               <Button size="lg" onClick={onOpenContact} className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
-                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Kirim Pesan
+                <IconWrapper iconName="paperplane" className="mr-2" /> Kirim Pesan
               </Button>
             </div>
           </div>
@@ -83,7 +86,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-4 sm:p-6 rounded-xl shadow-xl flex items-center gap-4 animate-bounce duration-[3000ms]">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                <FontAwesomeIcon icon={faUsers} className="text-lg sm:text-xl" />
+                <IconWrapper iconName="users" className="text-lg sm:text-xl" />
               </div>
               <div>
                 <p className="text-xs sm:text-sm text-gray-500">Klien Puas</p>
@@ -119,14 +122,14 @@ export const About = ({ company }: { company: CompanyData }) => {
             <div className="grid grid-cols-2 gap-6 pt-4">
               <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100">
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
-                  <FontAwesomeIcon icon={faUsers} className="text-xl" />
+                  <IconWrapper iconName="users" className="text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-gray-900">{company.stat_clients || "100+"}</p>
                 <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">{company.stat_clients_label || "Klien Puas"}</p>
               </div>
               <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent mb-4">
-                  <FontAwesomeIcon icon={faThLarge} className="text-xl" />
+                  <IconWrapper iconName="grid" className="text-xl" />
                 </div>
                 <p className="text-3xl font-bold text-gray-900">{company.stat_projects || "500+"}</p>
                 <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">{company.stat_projects_label || "Proyek Selesai"}</p>
@@ -191,7 +194,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <div className="space-y-6">
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-2xl" />
+                <IconWrapper iconName="mapmarker" className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Alamat Kantor</h3>
@@ -200,7 +203,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <FontAwesomeIcon icon={faPhone} className="text-2xl" />
+                <IconWrapper iconName="phone" className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Telepon & WhatsApp</h3>
@@ -210,7 +213,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <FontAwesomeIcon icon={faEnvelope} className="text-2xl" />
+                <IconWrapper iconName="envelope" className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Email Dukungan</h3>
@@ -220,7 +223,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
             <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <FontAwesomeIcon icon={faClock} className="text-2xl" />
+                <IconWrapper iconName="clock" className="text-2xl" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Jam Operasional</h3>

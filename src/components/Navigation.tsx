@@ -39,9 +39,10 @@ const ICON_MAP: Record<string, any> = {
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  if (!iconName) return <FontAwesomeIcon icon={faBuilding} className={className} />;
-  const name = iconName.toLowerCase();
+  const name = (iconName || '').toLowerCase().trim();
   const icon = ICON_MAP[name] || faBuilding;
+  
+  if (!icon) return null;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
 
@@ -79,7 +80,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center gap-2">
-            <IconWrapper iconName={company.logo_icon} className="w-8 h-8 text-primary" />
+            <IconWrapper iconName={company.logo_icon || 'building'} className="w-8 h-8 text-primary" />
             <span className="text-2xl font-headline font-bold text-gray-900 tracking-tight">
               {company.company_name}
             </span>
@@ -102,7 +103,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
             ))}
             <div className="pl-4">
               <Button onClick={onOpenContact} className="font-semibold rounded-xl">
-                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Pesan
+                <IconWrapper iconName="paperplane" className="mr-2" /> Pesan
               </Button>
             </div>
           </div>
@@ -138,7 +139,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
             </a>
           ))}
           <Button onClick={() => { onOpenContact(); setIsMenuOpen(false); }} className="w-full h-12 text-lg font-semibold mt-4 rounded-xl">
-            <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Hubungi Kami
+            <IconWrapper iconName="paperplane" className="mr-2" /> Hubungi Kami
           </Button>
         </div>
       </div>
@@ -153,7 +154,7 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
         <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <IconWrapper iconName={company.logo_icon} className="w-8 h-8 text-primary" />
+              <IconWrapper iconName={company.logo_icon || 'building'} className="w-8 h-8 text-primary" />
               <span className="text-2xl font-headline font-bold">{company.company_name}</span>
             </div>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -176,15 +177,15 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
             <h4 className="text-xl font-headline font-bold mb-8">Informasi Kontak</h4>
             <ul className="space-y-4 text-gray-400 text-lg">
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
+                <IconWrapper iconName="phone" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <span>{company.phone}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
+                <IconWrapper iconName="envelope" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <span>{company.email}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
+                <IconWrapper iconName="mapmarker" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <div className="flex flex-col">
                   {(company.address || '').split(',').map((line, i) => (
                     <span key={i} className="block">{line.trim()}</span>
