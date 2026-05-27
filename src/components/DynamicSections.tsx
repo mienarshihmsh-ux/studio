@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { CompanyData, ServiceData } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -17,8 +17,6 @@ import {
   faClock, 
   faUsers, 
   faThLarge, 
-  faMagic, 
-  faSpinner,
   faCogs,
   faChartLine,
   faShieldAlt,
@@ -26,14 +24,11 @@ import {
   faMobileAlt,
   faCloud
 } from "@fortawesome/free-solid-svg-icons";
-import { suggestHeroCopy, SuggestHeroCopyOutput } from "@/ai/flows/suggest-hero-copy";
-import { cn } from "@/lib/utils";
 
 const ICON_MAP: Record<string, any> = {
   building: faBuilding,
   users: faUsers,
   grid: faThLarge,
-  magic: faMagic,
   cogs: faCogs,
   chart: faChartLine,
   shield: faShieldAlt,
@@ -53,23 +48,6 @@ const IconWrapper = ({ iconName, className }: { iconName: string; className?: st
 };
 
 export const Hero = ({ company, services, onOpenContact }: { company: CompanyData; services: ServiceData[]; onOpenContact: () => void }) => {
-  const [aiCopy, setAiCopy] = useState<SuggestHeroCopyOutput | null>(null);
-  const [loadingAi, setLoadingAi] = useState(false);
-
-  const handleSuggestAi = async () => {
-    setLoadingAi(true);
-    try {
-      const result = await suggestHeroCopy({
-        services: services.map(s => ({ title: s.title, description: s.description }))
-      });
-      setAiCopy(result);
-    } catch (error) {
-      console.error("AI Copy failed", error);
-    } finally {
-      setLoadingAi(false);
-    }
-  };
-
   const placeholder = PlaceHolderImages.find(img => img.id === 'hero-image');
 
   return (
@@ -77,42 +55,20 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
-            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-headline font-extrabold text-gray-900 leading-tight">
-              {aiCopy?.headline || company.hero_title || "Solusi Terbaik Untuk Bisnis Anda"}
+            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-headline font-extrabold text-gray-900 leading-tight">
+              {company.hero_title || "Solusi Terbaik Untuk Bisnis Anda"}
             </h1>
-            
-            {/* Mobile AI Button: displayed after H1 on mobile */}
-            <div className="md:hidden">
-              <button 
-                onClick={handleSuggestAi}
-                disabled={loadingAi}
-                className="flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit w-fit"
-              >
-                {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
-                Optimalkan Copy dengan AI
-              </button>
-            </div>
 
             <p className="text-lg md:text-xl text-gray-600 max-w-lg leading-relaxed">
-              {aiCopy?.subheading || company.hero_subtitle || "Kami menyediakan layanan profesional berkualitas tinggi untuk membantu kesuksesan bisnis Anda."}
+              {company.hero_subtitle || "Kami menyediakan layanan profesional berkualitas tinggi untuk membantu kesuksesan bisnis Anda."}
             </p>
             <div className="flex flex-wrap gap-4 items-center">
-              <Button size="lg" onClick={onOpenContact} className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
-                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Kirim Pesan
-              </Button>
               <Button size="lg" variant="outline" asChild className="h-14 px-8 text-lg font-semibold rounded-xl border-primary text-primary hover:bg-primary/5">
                 <a href="#layanan">Lihat Layanan</a>
               </Button>
-              
-              {/* Desktop AI Button: displayed after main buttons */}
-              <button 
-                onClick={handleSuggestAi}
-                disabled={loadingAi}
-                className="hidden md:flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors bg-white/50 backdrop-blur px-3 py-1.5 rounded-full border border-accent/20 h-fit"
-              >
-                {loadingAi ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faMagic} />}
-                Optimalkan Copy dengan AI
-              </button>
+              <Button size="lg" onClick={onOpenContact} className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
+                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" /> Kirim Pesan
+              </Button>
             </div>
           </div>
           <div className="relative group perspective-1000 mt-12 md:mt-0">
