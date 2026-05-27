@@ -29,9 +29,11 @@ import {
   faRocket,
   faLightbulb,
   faLaptop,
+  faLaptopCode,
   faServer,
   faCheckCircle,
-  faStar
+  faStar,
+  faCloudUploadAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { 
   faFacebook, 
@@ -61,6 +63,8 @@ const ICON_MAP: Record<string, any> = {
   grid: faThLarge,
   cogs: faCogs,
   chart: faChartLine,
+  chart_line: faChartLine,
+  'chart-line': faChartLine,
   shield: faShieldAlt,
   globe: faGlobe,
   mobile: faMobileAlt,
@@ -74,9 +78,12 @@ const ICON_MAP: Record<string, any> = {
   rocket: faRocket,
   bulb: faLightbulb,
   laptop: faLaptop,
+  'laptop-code': faLaptopCode,
+  laptopcode: faLaptopCode,
   server: faServer,
   check: faCheckCircle,
-  star: faStar
+  star: faStar,
+  cloud_upload: faCloudUploadAlt
 };
 
 export const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
@@ -88,13 +95,18 @@ export const IconWrapper = ({ iconName, className }: { iconName?: string; classN
     return <i className={cn(name, className)}></i>;
   }
 
-  // 2. Check internal mapping for SVG components
+  // 2. Check internal mapping for SVG components (prioritize these for better performance)
   const mappedIcon = ICON_MAP[name.toLowerCase()];
   if (mappedIcon) {
     return <FontAwesomeIcon icon={mappedIcon} className={className} />;
   }
 
-  // 3. Fallback to Google Material Icons
+  // 3. If it has a hyphen but isn't mapped, try rendering as a FA icon directly
+  if (name.includes('-')) {
+    return <i className={cn(`fa-solid fa-${name}`, className)}></i>;
+  }
+
+  // 4. Fallback to Google Material Icons (handles underscores like "cloud_upload" or single words)
   return (
     <span className={cn("material-icons", className)} style={{ fontSize: 'inherit', verticalAlign: 'middle' }}>
       {name}
