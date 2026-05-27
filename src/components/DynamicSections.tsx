@@ -18,7 +18,7 @@ import {
   faUsers, 
   faThLarge, 
   faCogs,
-  faChartLine,
+  faChartLine, 
   faShieldAlt,
   faGlobe,
   faMobileAlt,
@@ -43,9 +43,9 @@ const ICON_MAP: Record<string, any> = {
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  const name = (iconName || '').toLowerCase().trim();
-  const icon = ICON_MAP[name] || faCogs;
-  
+  if (!iconName) return null;
+  const name = iconName.toLowerCase().trim();
+  const icon = ICON_MAP[name];
   if (!icon) return null;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
@@ -179,59 +179,67 @@ export const Services = ({ services }: { services: ServiceData[] }) => {
 };
 
 export const Contact = ({ company }: { company: CompanyData }) => {
-  const addressLines = (company.address || '').split(',');
-  const businessHours = (company.business_hours || '').split(',');
+  const addressLines = (company.address || '').split(',').map(s => s.trim()).filter(Boolean);
+  const businessHours = (company.business_hours || '').split(',').map(s => s.trim()).filter(Boolean);
 
   return (
     <section id="kontak" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-headline font-bold text-gray-900 mb-4">Hubungi Kami</h2>
           <div className="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 text-lg">Kami siap mendengar kebutuhan Anda.</p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-16">
-          <div className="space-y-6">
-            <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+        <div className="grid lg:grid-cols-10 gap-16 items-start">
+          <div className="lg:col-span-6 space-y-6">
+            <div className="flex items-start gap-6 p-8 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="mapmarker" className="text-2xl" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Alamat Kantor</h3>
-                {addressLines.map((line, i) => <p key={i} className="text-gray-600 text-lg">{line.trim()}</p>)}
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Alamat Kantor</h3>
+                {addressLines.length > 0 ? (
+                  addressLines.map((line, i) => <p key={i} className="text-gray-600 text-lg leading-relaxed">{line}</p>)
+                ) : (
+                  <p className="text-gray-600 text-lg">Alamat belum tersedia</p>
+                )}
               </div>
             </div>
-            <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+            <div className="flex items-start gap-6 p-8 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="phone" className="text-2xl" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Telepon & WhatsApp</h3>
-                <p className="text-gray-600 text-lg">{company.phone}</p>
-                {company.phone_wa && <p className="text-gray-600 text-lg">{company.phone_wa} (WhatsApp)</p>}
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Telepon & WhatsApp</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">{company.phone}</p>
+                {company.phone_wa && <p className="text-gray-600 text-lg leading-relaxed">{company.phone_wa} (WhatsApp)</p>}
               </div>
             </div>
-            <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+            <div className="flex items-start gap-6 p-8 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="envelope" className="text-2xl" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Email Dukungan</h3>
-                <p className="text-gray-600 text-lg">{company.email}</p>
-                {company.email_support && <p className="text-gray-600 text-lg">{company.email_support}</p>}
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Email Dukungan</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">{company.email}</p>
+                {company.email_support && <p className="text-gray-600 text-lg leading-relaxed">{company.email_support}</p>}
               </div>
             </div>
-            <div className="flex items-start gap-6 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+            <div className="flex items-start gap-6 p-8 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+              <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="clock" className="text-2xl" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Jam Operasional</h3>
-                {businessHours.map((line, i) => <p key={i} className="text-gray-600 text-lg">{line.trim()}</p>)}
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Jam Operasional</h3>
+                {businessHours.length > 0 ? (
+                  businessHours.map((line, i) => <p key={i} className="text-gray-600 text-lg leading-relaxed">{line}</p>)
+                ) : (
+                  <p className="text-gray-600 text-lg">Jam operasional belum tersedia</p>
+                )}
               </div>
             </div>
           </div>
-          <div className="rounded-3xl overflow-hidden shadow-2xl h-[500px] border-8 border-white relative">
+          <div className="lg:col-span-4 rounded-3xl overflow-hidden shadow-2xl h-[500px] lg:h-full min-h-[500px] border-8 border-white relative">
             <iframe 
               src={company.map_embed_url || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322851!2d106.81944991576919!3d-6.194287395503381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6c3a8f9a5c3%3A0x2e8d0c9b8f9a5c3!2sKuningan%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid"}
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" title="Location Map"></iframe>

@@ -39,9 +39,9 @@ const ICON_MAP: Record<string, any> = {
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  const name = (iconName || '').toLowerCase().trim();
-  const icon = ICON_MAP[name] || faBuilding;
-  
+  if (!iconName) return null;
+  const name = iconName.toLowerCase().trim();
+  const icon = ICON_MAP[name];
   if (!icon) return null;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
@@ -148,10 +148,12 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
 };
 
 export const Footer = ({ company, social, navItems }: { company: CompanyData; social: SocialData[]; navItems: NavigationItem[] }) => {
+  const addressLines = (company.address || '').split(',').map(s => s.trim()).filter(Boolean);
+
   return (
     <footer className="bg-gray-900 text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <IconWrapper iconName={company.logo_icon || 'building'} className="w-8 h-8 text-primary" />
@@ -187,9 +189,13 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
               <li className="flex items-start gap-3">
                 <IconWrapper iconName="mapmarker" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <div className="flex flex-col">
-                  {(company.address || '').split(',').map((line, i) => (
-                    <span key={i} className="block">{line.trim()}</span>
-                  ))}
+                  {addressLines.length > 0 ? (
+                    addressLines.map((line, i) => (
+                      <span key={i} className="block">{line}</span>
+                    ))
+                  ) : (
+                    <span>Alamat belum tersedia</span>
+                  )}
                 </div>
               </li>
             </ul>
