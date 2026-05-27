@@ -150,54 +150,58 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <p className="text-gray-600 mt-6 text-lg">Kami siap mendengar kebutuhan Anda.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+          <div className="flex flex-col gap-4">
+            {/* 1. Alamat Kantor */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="mapmarker" className="text-xl" />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Alamat Kantor</h3>
                 {addressLines.length > 0 ? (
-                  addressLines.map((line, i) => <p key={i} className="text-gray-600 text-base leading-snug">{line}</p>)
+                  addressLines.map((line, i) => <p key={i} className="text-gray-600 text-base leading-snug w-full">{line}</p>)
                 ) : (
                   <p className="text-gray-600 text-base">Alamat belum tersedia</p>
                 )}
               </div>
             </div>
             
+            {/* 2. Telepon */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="phone" className="text-xl" />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Telepon & WA</h3>
-                <p className="text-gray-600 text-base">{company.phone}</p>
-                {company.phone_wa && <p className="text-gray-600 text-base">{company.phone_wa}</p>}
+                <p className="text-gray-600 text-base w-full">{company.phone}</p>
+                {company.phone_wa && <p className="text-gray-600 text-base w-full">{company.phone_wa}</p>}
               </div>
             </div>
 
+            {/* 3. Jam Operasional */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="clock" className="text-xl" />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Jam Operasional</h3>
                 {businessHours.length > 0 ? (
-                  businessHours.map((line, i) => <p key={i} className="text-gray-600 text-base">{line}</p>)
+                  businessHours.map((line, i) => <p key={i} className="text-gray-600 text-base w-full">{line}</p>)
                 ) : (
                   <p className="text-gray-600 text-base">Jam operasional belum tersedia</p>
                 )}
               </div>
             </div>
 
+            {/* 4. Email */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="envelope" className="text-xl" />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
-                <p className="text-gray-600 text-base truncate">{company.email}</p>
-                {company.email_support && <p className="text-gray-600 text-base truncate">{company.email_support}</p>}
+                <p className="text-gray-600 text-base truncate w-full">{company.email}</p>
+                {company.email_support && <p className="text-gray-600 text-base truncate w-full">{company.email_support}</p>}
               </div>
             </div>
           </div>
