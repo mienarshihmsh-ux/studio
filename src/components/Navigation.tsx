@@ -49,6 +49,7 @@ const ICON_MAP: Record<string, any> = {
   building: faBuilding,
   building2: faBuilding,
   paperplane: faPaperPlane,
+  'paper-plane': faPaperPlane,
   facebook: faFacebook,
   instagram: faInstagram,
   twitter: faTwitter,
@@ -58,6 +59,7 @@ const ICON_MAP: Record<string, any> = {
   phone: faPhone,
   envelope: faEnvelope,
   mapmarker: faMapMarkerAlt,
+  'map-marker': faMapMarkerAlt,
   clock: faClock,
   users: faUsers,
   grid: faThLarge,
@@ -86,10 +88,10 @@ const ICON_MAP: Record<string, any> = {
   cloud_upload: faCloudUploadAlt
 };
 
-export const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
+export const IconWrapper = ({ iconName, className }: { iconName?: string | null; className?: string }) => {
   if (!iconName) return null;
   const name = iconName.trim();
-  if (!name) return null;
+  if (!name || name === 'null') return null;
 
   const lowerName = name.toLowerCase();
 
@@ -98,13 +100,13 @@ export const IconWrapper = ({ iconName, className }: { iconName?: string; classN
     return <i className={cn(name, className)}></i>;
   }
 
-  // 2. Internal SVG Mapping
+  // 2. Internal SVG Mapping (Best quality)
   const mappedIcon = ICON_MAP[lowerName];
-  if (mappedIcon) {
+  if (mappedIcon && typeof mappedIcon === 'object') {
     return <FontAwesomeIcon icon={mappedIcon} className={className} />;
   }
 
-  // 3. Hyphenated names (often FontAwesome keywords like "laptop-code")
+  // 3. Hyphenated names (likely FontAwesome keywords like "laptop-code")
   if (name.includes('-')) {
     return <i className={cn(`fa-solid fa-${name}`, className)}></i>;
   }
@@ -146,7 +148,7 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
   return (
     <nav className={cn(
       "fixed w-full top-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-white/80 backdrop-blur-md shadow-lg py-2" : "bg-transparent py-4"
+      isScrolled ? "bg-white/90 backdrop-blur-md shadow-lg py-2" : "bg-transparent py-4"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -223,7 +225,7 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
   return (
     <footer className="bg-gray-900 text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <IconWrapper iconName={company.logo_icon || 'building'} className="w-8 h-8 text-primary" />
@@ -249,24 +251,24 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
             <h4 className="text-xl font-headline font-bold mb-8">Informasi Kontak</h4>
             <ul className="space-y-4 text-gray-400 text-lg">
               <li className="flex items-start gap-3">
-                <IconWrapper iconName="phone" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
-                <span>{company.phone}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <IconWrapper iconName="envelope" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
-                <span>{company.email}</span>
-              </li>
-              <li className="flex items-start gap-3">
                 <IconWrapper iconName="mapmarker" className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <div className="flex flex-col">
                   {addressLines.length > 0 ? (
                     addressLines.map((line, i) => (
-                      <span key={i} className="block">{line}</span>
+                      <span key={i} className="block leading-snug">{line}</span>
                     ))
                   ) : (
                     <span>Alamat belum tersedia</span>
                   )}
                 </div>
+              </li>
+              <li className="flex items-center gap-3">
+                <IconWrapper iconName="phone" className="text-primary w-5 h-5 flex-shrink-0" />
+                <span>{company.phone}</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <IconWrapper iconName="envelope" className="text-primary w-5 h-5 flex-shrink-0" />
+                <span>{company.email}</span>
               </li>
             </ul>
           </div>

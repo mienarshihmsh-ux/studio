@@ -13,7 +13,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
   const placeholder = PlaceHolderImages.find(img => img.id === 'hero-image');
 
   return (
-    <section id="beranda" className="pt-24 min-h-[90vh] flex items-center bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section id="beranda" className="pt-24 min-h-[90vh] flex items-center bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
@@ -72,7 +72,7 @@ export const About = ({ company }: { company: CompanyData }) => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <h3 className="text-3xl font-headline font-bold text-gray-800 leading-tight">
-              Membangun Masa Depan <span className="text-primary">{company.company_name}</span>
+              Membangun Masa Depan Bersama <span className="text-primary">{company.company_name}</span>
             </h3>
             <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
               <p>{company.about_description}</p>
@@ -150,7 +150,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <p className="text-gray-600 mt-6 text-lg">Kami siap mendengar kebutuhan Anda.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 w-full">
             {/* 1. Alamat Kantor */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
@@ -158,11 +158,13 @@ export const Contact = ({ company }: { company: CompanyData }) => {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Alamat Kantor</h3>
-                {addressLines.length > 0 ? (
-                  addressLines.map((line, i) => <p key={i} className="text-gray-600 text-base leading-snug w-full">{line}</p>)
-                ) : (
-                  <p className="text-gray-600 text-base">Alamat belum tersedia</p>
-                )}
+                <div className="space-y-1">
+                  {addressLines.length > 0 ? (
+                    addressLines.map((line, i) => <p key={i} className="text-gray-600 text-base leading-snug w-full">{line}</p>)
+                  ) : (
+                    <p className="text-gray-600 text-base">Alamat belum tersedia</p>
+                  )}
+                </div>
               </div>
             </div>
             
@@ -185,15 +187,17 @@ export const Contact = ({ company }: { company: CompanyData }) => {
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Jam Operasional</h3>
-                {businessHours.length > 0 ? (
-                  businessHours.map((line, i) => <p key={i} className="text-gray-600 text-base w-full">{line}</p>)
-                ) : (
-                  <p className="text-gray-600 text-base">Jam operasional belum tersedia</p>
-                )}
+                <div className="space-y-1">
+                  {businessHours.length > 0 ? (
+                    businessHours.map((line, i) => <p key={i} className="text-gray-600 text-base w-full">{line}</p>)
+                  ) : (
+                    <p className="text-gray-600 text-base">Jam operasional belum tersedia</p>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* 4. Email */}
+            {/* 4. Email - Always Last */}
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all w-full">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="envelope" className="text-xl" />
@@ -206,7 +210,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
           </div>
           
-          <div className="rounded-3xl overflow-hidden shadow-2xl min-h-[400px] border-8 border-white relative">
+          <div className="rounded-3xl overflow-hidden shadow-2xl min-h-[500px] border-8 border-white relative w-full">
             <iframe 
               src={company.map_embed_url || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322851!2d106.81944991576919!3d-6.194287395503381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6c3a8f9a5c3%3A0x2e8d0c9b8f9a5c3!2sKuningan%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid"}
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" title="Location Map"></iframe>

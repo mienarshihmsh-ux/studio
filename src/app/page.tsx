@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -51,7 +52,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-4">
-        <FontAwesomeIcon icon={faSpinner} spin className="text-5xl text-primary" />
+        {faSpinner && <FontAwesomeIcon icon={faSpinner} spin className="text-5xl text-primary" />}
         <p className="text-xl font-headline font-bold text-gray-800">Menghubungkan ke SheetsFlow...</p>
         <p className="text-gray-500 animate-pulse">Sinkronisasi data real-time sedang berlangsung</p>
       </div>
@@ -61,11 +62,11 @@ export default function Home() {
   if (error || !data) {
     return (
       <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-6 text-center">
-        <FontAwesomeIcon icon={faExclamationTriangle} className="text-7xl text-red-500 mb-6" />
+        {faExclamationTriangle && <FontAwesomeIcon icon={faExclamationTriangle} className="text-7xl text-red-500 mb-6" />}
         <h2 className="text-3xl font-headline font-bold text-gray-900 mb-2">Terjadi Kesalahan Sinkronisasi</h2>
         <p className="text-gray-600 max-w-md mb-8">{error}</p>
         <Button size="lg" onClick={fetchData} className="rounded-xl">
-          <FontAwesomeIcon icon={faSync} className="mr-2" /> Coba Lagi
+          {faSync && <FontAwesomeIcon icon={faSync} className="mr-2" />} Coba Lagi
         </Button>
       </div>
     );
