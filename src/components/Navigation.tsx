@@ -101,7 +101,7 @@ export const IconWrapper = ({ iconName, className }: { iconName?: string; classN
     return <FontAwesomeIcon icon={mappedIcon} className={className} />;
   }
 
-  // 3. If it has a hyphen but isn't mapped, try rendering as a FA icon directly
+  // 3. If it has a hyphen or underscore but isn't mapped, try rendering as a FA icon directly
   if (name.includes('-')) {
     return <i className={cn(`fa-solid fa-${name}`, className)}></i>;
   }
