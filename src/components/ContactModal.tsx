@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import Swal from "sweetalert2";
 import {
   Dialog,
   DialogContent,
@@ -25,7 +26,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
@@ -42,7 +42,6 @@ interface ContactModalProps {
 }
 
 export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -71,17 +70,29 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         }),
       });
 
-      toast({
+      Swal.fire({
         title: "Pesan Terkirim!",
-        description: "Terima kasih, kami akan segera menghubungi Anda.",
+        text: "Terima kasih, kami akan segera menghubungi Anda.",
+        icon: "success",
+        confirmButtonColor: "#2563EB",
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-xl px-8'
+        }
       });
+      
       form.reset();
       onClose();
     } catch (error) {
-      toast({
-        variant: "destructive",
+      Swal.fire({
         title: "Gagal Mengirim",
-        description: "Terjadi kesalahan. Silakan coba lagi.",
+        text: "Terjadi kesalahan. Silakan coba lagi.",
+        icon: "error",
+        confirmButtonColor: "#2563EB",
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'rounded-xl px-8'
+        }
       });
     } finally {
       setIsSubmitting(false);

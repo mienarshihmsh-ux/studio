@@ -89,9 +89,9 @@ const ICON_MAP: Record<string, any> = {
 };
 
 export const IconWrapper = ({ iconName, className }: { iconName?: string | null; className?: string }) => {
-  if (!iconName) return null;
+  if (!iconName || iconName === 'null') return null;
   const name = iconName.trim();
-  if (!name || name === 'null') return null;
+  if (!name) return null;
 
   const lowerName = name.toLowerCase();
 
