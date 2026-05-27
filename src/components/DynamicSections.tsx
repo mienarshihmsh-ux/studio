@@ -149,8 +149,8 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <div className="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
           <p className="text-gray-600 mt-6 text-lg">Kami siap mendengar kebutuhan Anda.</p>
         </div>
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="md:col-span-2 flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="mapmarker" className="text-xl" />
@@ -202,7 +202,7 @@ export const Contact = ({ company }: { company: CompanyData }) => {
             </div>
           </div>
           
-          <div className="lg:col-span-5 rounded-3xl overflow-hidden shadow-2xl min-h-[400px] border-8 border-white relative">
+          <div className="rounded-3xl overflow-hidden shadow-2xl min-h-[400px] border-8 border-white relative">
             <iframe 
               src={company.map_embed_url || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322851!2d106.81944991576919!3d-6.194287395503381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6c3a8f9a5c3%3A0x2e8d0c9b8f9a5c3!2sKuningan%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid"}
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" title="Location Map"></iframe>
