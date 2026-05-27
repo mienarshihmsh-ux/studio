@@ -41,8 +41,8 @@ const ICON_MAP: Record<string, any> = {
   clock: faClock
 };
 
-const IconWrapper = ({ iconName, className }: { iconName: string; className?: string }) => {
-  const name = iconName.toLowerCase();
+const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
+  const name = (iconName || 'cogs').toLowerCase();
   const icon = ICON_MAP[name] || faCogs;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
