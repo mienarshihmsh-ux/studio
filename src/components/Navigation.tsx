@@ -89,6 +89,8 @@ const ICON_MAP: Record<string, any> = {
 export const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
   if (!iconName) return null;
   const name = iconName.trim();
+  if (!name) return null;
+
   const lowerName = name.toLowerCase();
 
   // 1. Explicit FontAwesome class (e.g. "fa-solid fa-user")
@@ -107,7 +109,7 @@ export const IconWrapper = ({ iconName, className }: { iconName?: string; classN
     return <i className={cn(`fa-solid fa-${name}`, className)}></i>;
   }
 
-  // 4. Fallback to Google Material Icons (handles underscores or single keywords)
+  // 4. Fallback to Google Material Icons
   return (
     <span className={cn("material-icons", className)} style={{ fontSize: 'inherit', verticalAlign: 'middle' }}>
       {name}
@@ -228,7 +230,7 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
               <span className="text-2xl font-headline font-bold">{company.company_name}</span>
             </div>
             <p className="text-gray-400 text-lg leading-relaxed">
-              {company.footer_tagline || "Memberikan solusi bisnis terbaik yang adaptif and inovatif."}
+              {company.footer_tagline || "Memberikan solusi terbaik untuk kesuksesan bisnis Anda."}
             </p>
           </div>
           <div>

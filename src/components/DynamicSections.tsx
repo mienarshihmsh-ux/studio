@@ -150,8 +150,8 @@ export const Contact = ({ company }: { company: CompanyData }) => {
           <p className="text-gray-600 mt-6 text-lg">Kami siap mendengar kebutuhan Anda.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="md:col-span-2 flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="mapmarker" className="text-xl" />
               </div>
@@ -178,17 +178,6 @@ export const Contact = ({ company }: { company: CompanyData }) => {
 
             <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
-                <IconWrapper iconName="envelope" className="text-xl" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
-                <p className="text-gray-600 text-base truncate max-w-[200px]">{company.email}</p>
-                {company.email_support && <p className="text-gray-600 text-base truncate max-w-[200px]">{company.email_support}</p>}
-              </div>
-            </div>
-
-            <div className="md:col-span-2 flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                 <IconWrapper iconName="clock" className="text-xl" />
               </div>
               <div>
@@ -198,6 +187,17 @@ export const Contact = ({ company }: { company: CompanyData }) => {
                 ) : (
                   <p className="text-gray-600 text-base">Jam operasional belum tersedia</p>
                 )}
+              </div>
+            </div>
+
+            <div className="flex items-start gap-5 p-6 bg-secondary rounded-2xl border border-gray-100 hover:border-primary/20 transition-all">
+              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+                <IconWrapper iconName="envelope" className="text-xl" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
+                <p className="text-gray-600 text-base truncate">{company.email}</p>
+                {company.email_support && <p className="text-gray-600 text-base truncate">{company.email_support}</p>}
               </div>
             </div>
           </div>
