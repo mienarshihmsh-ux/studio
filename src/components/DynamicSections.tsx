@@ -77,11 +77,11 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
-            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-headline font-extrabold text-gray-900 leading-tight">
+            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-headline font-extrabold text-gray-900 leading-tight">
               {aiCopy?.headline || company.hero_title || "Solusi Terbaik Untuk Bisnis Anda"}
             </h1>
             
-            {/* Mobile AI Button: displayed after H1 */}
+            {/* Mobile AI Button: displayed after H1 on mobile */}
             <div className="md:hidden">
               <button 
                 onClick={handleSuggestAi}
@@ -115,7 +115,7 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
               </button>
             </div>
           </div>
-          <div className="relative group perspective-1000 hidden md:block">
+          <div className="relative group perspective-1000 mt-12 md:mt-0">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
               <Image 
                 src={company.hero_image || placeholder?.imageUrl || ""} 
@@ -125,13 +125,13 @@ export const Hero = ({ company, services, onOpenContact }: { company: CompanyDat
                 className="w-full object-cover aspect-[4/3]"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl flex items-center gap-4 animate-bounce duration-[3000ms]">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                <FontAwesomeIcon icon={faUsers} className="text-xl" />
+            <div className="absolute -bottom-6 -left-6 bg-white p-4 sm:p-6 rounded-xl shadow-xl flex items-center gap-4 animate-bounce duration-[3000ms]">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">
+                <FontAwesomeIcon icon={faUsers} className="text-lg sm:text-xl" />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Klien Puas</p>
-                <p className="text-xl font-bold text-gray-800">{company.stat_clients || "100+"}</p>
+                <p className="text-xs sm:text-sm text-gray-500">Klien Puas</p>
+                <p className="text-lg sm:text-xl font-bold text-gray-800">{company.stat_clients || "100+"}</p>
               </div>
             </div>
           </div>
