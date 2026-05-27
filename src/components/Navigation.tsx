@@ -12,7 +12,26 @@ import {
   faTimes, 
   faPhone, 
   faEnvelope, 
-  faMapMarkerAlt 
+  faMapMarkerAlt,
+  faClock,
+  faUsers,
+  faThLarge,
+  faCogs,
+  faChartLine,
+  faShieldAlt,
+  faGlobe,
+  faMobileAlt,
+  faCloud,
+  faCode,
+  faBullhorn,
+  faLock,
+  faHeadset,
+  faRocket,
+  faLightbulb,
+  faLaptop,
+  faServer,
+  faCheckCircle,
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
 import { 
   faFacebook, 
@@ -26,6 +45,7 @@ import { cn } from "@/lib/utils";
 
 const ICON_MAP: Record<string, any> = {
   building: faBuilding,
+  building2: faBuilding,
   paperplane: faPaperPlane,
   facebook: faFacebook,
   instagram: faInstagram,
@@ -35,7 +55,28 @@ const ICON_MAP: Record<string, any> = {
   youtube: faYoutube,
   phone: faPhone,
   envelope: faEnvelope,
-  mapmarker: faMapMarkerAlt
+  mapmarker: faMapMarkerAlt,
+  clock: faClock,
+  users: faUsers,
+  grid: faThLarge,
+  cogs: faCogs,
+  chart: faChartLine,
+  shield: faShieldAlt,
+  globe: faGlobe,
+  mobile: faMobileAlt,
+  cloud: faCloud,
+  code: faCode,
+  bullhorn: faBullhorn,
+  lock: faLock,
+  security: faShieldAlt,
+  headset: faHeadset,
+  support: faHeadset,
+  rocket: faRocket,
+  bulb: faLightbulb,
+  laptop: faLaptop,
+  server: faServer,
+  check: faCheckCircle,
+  star: faStar
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {

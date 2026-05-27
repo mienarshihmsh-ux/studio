@@ -22,11 +22,22 @@ import {
   faShieldAlt,
   faGlobe,
   faMobileAlt,
-  faCloud
+  faCloud,
+  faCode,
+  faBullhorn,
+  faLock,
+  faHeadset,
+  faRocket,
+  faLightbulb,
+  faLaptop,
+  faServer,
+  faCheckCircle,
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
 
 const ICON_MAP: Record<string, any> = {
   building: faBuilding,
+  building2: faBuilding,
   users: faUsers,
   grid: faThLarge,
   cogs: faCogs,
@@ -39,7 +50,19 @@ const ICON_MAP: Record<string, any> = {
   envelope: faEnvelope,
   mapmarker: faMapMarkerAlt,
   clock: faClock,
-  paperplane: faPaperPlane
+  paperplane: faPaperPlane,
+  code: faCode,
+  bullhorn: faBullhorn,
+  lock: faLock,
+  security: faShieldAlt,
+  headset: faHeadset,
+  support: faHeadset,
+  rocket: faRocket,
+  bulb: faLightbulb,
+  laptop: faLaptop,
+  server: faServer,
+  check: faCheckCircle,
+  star: faStar
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
