@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -6,6 +5,7 @@ import { WebsiteData } from "@/lib/types";
 import { Navbar, Footer } from "@/components/Navigation";
 import { Hero, About, Services, Contact } from "@/components/DynamicSections";
 import { ContactModal } from "@/components/ContactModal";
+import { BackToTop } from "@/components/BackToTop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faExclamationTriangle, faSync } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
@@ -101,6 +101,8 @@ export default function Home() {
         isOpen={isContactOpen} 
         onClose={() => setIsContactOpen(false)} 
       />
+
+      <BackToTop />
     </main>
   );
 }
