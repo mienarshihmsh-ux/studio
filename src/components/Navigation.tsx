@@ -79,12 +79,27 @@ const ICON_MAP: Record<string, any> = {
   star: faStar
 };
 
-const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
+export const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
   if (!iconName) return null;
-  const name = iconName.toLowerCase().trim();
-  const icon = ICON_MAP[name];
-  if (!icon) return null;
-  return <FontAwesomeIcon icon={icon} className={className} />;
+  const name = iconName.trim();
+
+  // 1. Check if it's an explicit FontAwesome class (e.g. "fa-solid fa-user")
+  if (name.toLowerCase().startsWith('fa-')) {
+    return <i className={cn(name, className)}></i>;
+  }
+
+  // 2. Check internal mapping for SVG components
+  const mappedIcon = ICON_MAP[name.toLowerCase()];
+  if (mappedIcon) {
+    return <FontAwesomeIcon icon={mappedIcon} className={className} />;
+  }
+
+  // 3. Fallback to Google Material Icons
+  return (
+    <span className={cn("material-icons", className)} style={{ fontSize: 'inherit', verticalAlign: 'middle' }}>
+      {name}
+    </span>
+  );
 };
 
 export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyData; navItems: NavigationItem[]; onOpenContact: () => void }) => {
@@ -160,7 +175,6 @@ export const Navbar = ({ company, navItems, onOpenContact }: { company: CompanyD
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div className={cn(
         "md:hidden absolute top-full left-0 w-full bg-white shadow-xl transition-all duration-300 overflow-hidden",
         isMenuOpen ? "max-h-screen border-t border-gray-100" : "max-h-0"

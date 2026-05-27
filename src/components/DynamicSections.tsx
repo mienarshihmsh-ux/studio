@@ -7,71 +7,7 @@ import { CompanyData, ServiceData } from "@/lib/types";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { 
-  faBuilding, 
-  faPaperPlane, 
-  faPhone, 
-  faEnvelope, 
-  faMapMarkerAlt, 
-  faClock, 
-  faUsers, 
-  faThLarge, 
-  faCogs,
-  faChartLine, 
-  faShieldAlt,
-  faGlobe,
-  faMobileAlt,
-  faCloud,
-  faCode,
-  faBullhorn,
-  faLock,
-  faHeadset,
-  faRocket,
-  faLightbulb,
-  faLaptop,
-  faServer,
-  faCheckCircle,
-  faStar
-} from "@fortawesome/free-solid-svg-icons";
-
-const ICON_MAP: Record<string, any> = {
-  building: faBuilding,
-  building2: faBuilding,
-  users: faUsers,
-  grid: faThLarge,
-  cogs: faCogs,
-  chart: faChartLine,
-  shield: faShieldAlt,
-  globe: faGlobe,
-  mobile: faMobileAlt,
-  cloud: faCloud,
-  phone: faPhone,
-  envelope: faEnvelope,
-  mapmarker: faMapMarkerAlt,
-  clock: faClock,
-  paperplane: faPaperPlane,
-  code: faCode,
-  bullhorn: faBullhorn,
-  lock: faLock,
-  security: faShieldAlt,
-  headset: faHeadset,
-  support: faHeadset,
-  rocket: faRocket,
-  bulb: faLightbulb,
-  laptop: faLaptop,
-  server: faServer,
-  check: faCheckCircle,
-  star: faStar
-};
-
-const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  if (!iconName) return null;
-  const name = iconName.toLowerCase().trim();
-  const icon = ICON_MAP[name];
-  if (!icon) return null;
-  return <FontAwesomeIcon icon={icon} className={className} />;
-};
+import { IconWrapper } from "@/components/Navigation";
 
 export const Hero = ({ company, services, onOpenContact }: { company: CompanyData; services: ServiceData[]; onOpenContact: () => void }) => {
   const placeholder = PlaceHolderImages.find(img => img.id === 'hero-image');
