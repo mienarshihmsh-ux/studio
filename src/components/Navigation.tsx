@@ -39,7 +39,8 @@ const ICON_MAP: Record<string, any> = {
 };
 
 const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
-  const name = (iconName || 'building').toLowerCase();
+  if (!iconName) return <FontAwesomeIcon icon={faBuilding} className={className} />;
+  const name = iconName.toLowerCase();
   const icon = ICON_MAP[name] || faBuilding;
   return <FontAwesomeIcon icon={icon} className={className} />;
 };
@@ -175,24 +176,28 @@ export const Footer = ({ company, social, navItems }: { company: CompanyData; so
             <h4 className="text-xl font-headline font-bold mb-8">Informasi Kontak</h4>
             <ul className="space-y-4 text-gray-400 text-lg">
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1 w-5 h-5" />
+                <FontAwesomeIcon icon={faPhone} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <span>{company.phone}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1 w-5 h-5" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
                 <span>{company.email}</span>
               </li>
               <li className="flex items-start gap-3">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1 w-5 h-5" />
-                <span>{(company.address || '').split(',')[0]}</span>
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="text-primary mt-1 w-5 h-5 flex-shrink-0" />
+                <div className="flex flex-col">
+                  {(company.address || '').split(',').map((line, i) => (
+                    <span key={i} className="block">{line.trim()}</span>
+                  ))}
+                </div>
               </li>
             </ul>
           </div>
           <div>
             <h4 className="text-xl font-headline font-bold mb-8">Ikuti Kami</h4>
             <div className="flex gap-4">
-              {social.map((item, idx) => (
-                <a key={idx} href={item.url} target="_blank" className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary transition-all duration-300 group">
+              {(social || []).map((item, idx) => (
+                <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-primary transition-all duration-300 group">
                    <IconWrapper iconName={item.icon} className="w-6 h-6 text-gray-400 group-hover:text-white" />
                 </a>
               ))}
