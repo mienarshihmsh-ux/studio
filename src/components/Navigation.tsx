@@ -89,24 +89,25 @@ const ICON_MAP: Record<string, any> = {
 export const IconWrapper = ({ iconName, className }: { iconName?: string; className?: string }) => {
   if (!iconName) return null;
   const name = iconName.trim();
+  const lowerName = name.toLowerCase();
 
-  // 1. Check if it's an explicit FontAwesome class (e.g. "fa-solid fa-user")
-  if (name.toLowerCase().startsWith('fa-')) {
+  // 1. Explicit FontAwesome class (e.g. "fa-solid fa-user")
+  if (lowerName.startsWith('fa-')) {
     return <i className={cn(name, className)}></i>;
   }
 
-  // 2. Check internal mapping for SVG components (prioritize these for better performance)
-  const mappedIcon = ICON_MAP[name.toLowerCase()];
+  // 2. Internal SVG Mapping
+  const mappedIcon = ICON_MAP[lowerName];
   if (mappedIcon) {
     return <FontAwesomeIcon icon={mappedIcon} className={className} />;
   }
 
-  // 3. If it has a hyphen or underscore but isn't mapped, try rendering as a FA icon directly
+  // 3. Hyphenated names (often FontAwesome keywords like "laptop-code")
   if (name.includes('-')) {
     return <i className={cn(`fa-solid fa-${name}`, className)}></i>;
   }
 
-  // 4. Fallback to Google Material Icons (handles underscores like "cloud_upload" or single words)
+  // 4. Fallback to Google Material Icons (handles underscores or single keywords)
   return (
     <span className={cn("material-icons", className)} style={{ fontSize: 'inherit', verticalAlign: 'middle' }}>
       {name}
